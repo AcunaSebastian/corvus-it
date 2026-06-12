@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Coffee } from "lucide-react";
+import { ArrowRight, Check, Coffee, ImageIcon } from "lucide-react";
 import { Reveal } from "./reveal";
 
 const CalendarMock = () => (
@@ -20,13 +20,12 @@ const CalendarMock = () => (
       ].map(({ n, active, ring }) => (
         <span
           key={n}
-          className={`aspect-square rounded grid place-items-center ${
-            ring
-              ? "bg-primary/30 text-primary ring-1 ring-primary"
-              : active
+          className={`aspect-square rounded grid place-items-center ${ring
+            ? "bg-primary/30 text-primary ring-1 ring-primary"
+            : active
               ? "bg-primary/15 text-primary"
               : "text-muted-foreground"
-          }`}
+            }`}
         >
           {n}
         </span>
@@ -78,6 +77,60 @@ const TerminalMock = () => (
   </div>
 );
 
+const ProductImageGallery = ({
+  name,
+  buildLabel,
+  images = ["", "", ""],
+}: {
+  name: string;
+  buildLabel: string;
+  images?: string[];
+}) => (
+  <div className="w-full space-y-2">
+    <div className="relative rounded-lg overflow-hidden bg-white/[0.03] border border-softer aspect-video">
+      {images[0] ? (
+        <img
+          src={images[0]}
+          alt={`${name} - vista principal`}
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+          <ImageIcon className="w-5 h-5 text-primary/20" strokeWidth={1.4} />
+          <span className="text-[10px] text-muted-foreground/40 font-mono">
+            Pantalla principal
+          </span>
+        </div>
+      )}
+    </div>
+    <div className="grid grid-cols-2 gap-2">
+      {[0, 1].map((i) => (
+        <div
+          key={i}
+          className="relative rounded border border-softer bg-white/[0.03] aspect-video overflow-hidden"
+        >
+          {images[i + 1] ? (
+            <img
+              src={images[i + 1]}
+              alt={`${name} - captura ${i + 2}`}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-[9px] text-muted-foreground/30 font-mono">
+                Captura {i + 2}
+              </span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <p className="text-[10px] text-muted-foreground/50 font-mono text-center">
+      {buildLabel}
+    </p>
+  </div>
+);
+
 const products = [
   {
     name: "CorvusBarber",
@@ -89,7 +142,7 @@ const products = [
     features: ["Agenda online", "Caja diaria", "Fidelización", "Reportes"],
     cta: "Ver más",
     mock: <CalendarMock />,
-    href: "#",
+    href: "https://barber.corvusit.cl/",
   },
   {
     name: "CorvusCore",
@@ -101,31 +154,53 @@ const products = [
     features: ["Multi-cliente", "Facturación electrónica", "Costos en vivo", "Alertas"],
     cta: "Ver más",
     mock: <TerminalMock />,
-    href: "#",
+    href: "https://core.corvusit.cl",
   },
   {
     name: "CorvusCoffee",
-    badge: "Próximamente",
-    badgeClass: "bg-warn/10 text-warn border-warn/20",
+    badge: "Cafeteria",
+    badgeClass: "bg-primary/10 text-primary border-primary/20",
     version: "beta privada",
-    description:
-      "Punto de venta y gestión de inventario para cafeterías independientes. En desarrollo activo — disponible Q3 2026.",
-    features: [],
-    cta: "Sumarme a la lista",
+    description: "Corvus Coffee no es solo un POS. Es el sistema operativo de tu cafetería: gestiona pedidos, mesas, reservas, staff, contenido y candidatos desde un solo panel. Moderno, en tiempo real y listo para el día a día más exigente.",
+    features: ["Menú Digital Interactivo", "Pedidos desde la Mesa con QR", "Plano de Mesas en Tiempo Real", "Dashboard con Métricas en Tiempo Real", "Blog Integrado — \"El Cuaderno\"", "Portal de Empleo Propio", "Acceso por Roles", "y mucho más"],
+    cta: "Pronto",
     mock: (
-      <div className="relative text-center">
-        <div className="absolute inset-0 grid-overlay opacity-50 rounded-lg" />
-        <div className="relative">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 border border-primary/20 grid place-items-center">
-            <Coffee className="w-6 h-6 text-primary" strokeWidth={1.6} />
-          </div>
-          <div className="text-xs text-muted-foreground font-mono mt-3">build 0.4.2 · staging</div>
-        </div>
-      </div>
+      <ProductImageGallery
+        name="CorvusCoffee"
+        buildLabel="build 1.0.0 · pre-producción"
+        images={[
+          "",  // reemplaza con: "/images/corvus-coffee/pantalla-principal.png"
+          "",  // reemplaza con: "/images/corvus-coffee/pedidos.png"
+          "",  // reemplaza con: "/images/corvus-coffee/mesas.png"
+        ]}
+      />
     ),
     href: "#contacto",
     dim: true,
   },
+  {
+    name: "CorvusVet",
+    badge: "Veterinaria",
+    badgeClass: "bg-orange/10 text-orange border-orange/20",
+    version: "beta privada",
+    description: "Con CorvusVet puedes  Sistema de gestión y punto de venta para veterinarias independientes. Control total de consultas, vacunas, agenda y stock",
+    features: [],
+    cta: "Pronto",
+    mock: (
+      <ProductImageGallery
+        name="CorvusVet"
+        buildLabel="build 0.4.2 · staging"
+        images={[
+          "",  // reemplaza con: "/images/corvus-vet/pantalla-principal.png"
+          "",  // reemplaza con: "/images/corvus-vet/consultas.png"
+          "",  // reemplaza con: "/images/corvus-vet/agenda.png"
+        ]}
+      />
+    ),
+    href: "#contacto",
+    dim: true,
+  },
+
 ];
 
 export function Products() {

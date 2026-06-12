@@ -106,8 +106,8 @@ const DashboardMockup = () => (
 );
 
 const stats = [
-  { value: "40+", label: "Proyectos entregados" },
-  { value: "12", label: "Industrias" },
+  { value: "4+", label: "Proyectos entregados" },
+  { value: "5", label: "Industrias" },
   { value: "99.9%", label: "Uptime promedio" },
   { value: "CL", label: "Equipo local" },
 ];

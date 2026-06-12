@@ -28,14 +28,14 @@ export function Contact() {
 
                 <div className="mt-7 flex flex-wrap gap-3">
                   <a
-                    href="mailto:contacto@corvusit.cl"
+                    href="mailto:ventas@corvusit.cl"
                     className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-5 py-3 rounded-md transition-colors shadow-lg shadow-primary/30"
                   >
                     <Mail className="w-4 h-4" />
                     Escribirnos
                   </a>
                   <a
-                    href="https://wa.me/56900000000"
+                    href="https://wa.me/56948426521"
                     className="inline-flex items-center gap-2 text-foreground font-medium px-5 py-3 rounded-md border border-soft hover:border-primary/40 transition-colors"
                   >
                     <MessageCircle className="w-4 h-4" />
